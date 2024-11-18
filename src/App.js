@@ -1,22 +1,27 @@
 import logo from './logo.svg';
 import './App.css';
+import Counter from './components/Counter/Counter'
+import Controllers from './components/Controllers/Controllers';
+import RobotList from './components/RobotList/RobotList';
+
+import { useState } from 'react'
+import { users } from './users';
 
 function App() {
+  const [count, setCount] = useState(1)
+  const plus = () => setCount(count + 1)
+  const minus = () => setCount(count - 1)
+
+  const [robots, setRobots] = useState(users)
+    
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <RobotList robots={robots} />
+        <div className='counts'>
+          <Counter count={ count } />
+          <Controllers plus={plus} minus={minus} />
+        </div>
       </header>
     </div>
   );
